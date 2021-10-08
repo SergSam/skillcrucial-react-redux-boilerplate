@@ -78,7 +78,7 @@ server.post('/api/v1/users', async (req, res) => {
 server.patch('/api/v1/users/:userId', async (req, res) => {
   const { userId } = req.params
   const data = req.body
-  const updatedUser = { ...data, id: userId} 
+  const updatedUser = { ...data, id: +userId} 
   const userList = await getFileContent(filePath)
   const updatedList = userList.map(obj => (obj.id === +userId) ? {...obj, ...updatedUser} : obj)
   await writeFile(filePath, JSON.stringify(updatedList), 'utf8')
